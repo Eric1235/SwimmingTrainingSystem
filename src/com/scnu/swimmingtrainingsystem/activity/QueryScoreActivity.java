@@ -593,7 +593,7 @@ public class QueryScoreActivity extends Activity {
 				if (isConnect) {
 					getScoresRequest(dateString);
 				} else {
-					CommonUtils.showToast(this, mToast, "无法连接服务器！");
+					CommonUtils.showToast(this, mToast, getString(R.string.cannot_connect_to_server));
 				}
 			} else {
 				new QueryScoreTask().execute(dateString);

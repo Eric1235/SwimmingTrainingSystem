@@ -3,11 +3,13 @@
 
      <!-- common -->
     <string name="synchronizing">正在同步…………</string>
+    <string name="onSubmitting">正在提交…………</string>
     <string name="synchronized_success">同步成功</string>
     <string name="synchronized_failed">同步失败</string>
     <string name="app_name">游泳计时器</string>
     <string name="quit_app">再按一次退出程序</string>
     <string name="action_settings">Settings</string>
+    <string name="stroke">泳姿</string>
     <string name="on">男</string>
     <string name="off">女</string>
 
@@ -69,4 +71,16 @@
     
     <!-- 使用说明 -->
     <string name="user_tip">使用说明</string>
+    
+    <!-- mainactivity -->
+    <string name="athlete">运动员</string>
+    <string name="timer">计时器</string>
+    <string name="otherfunctions">小功能</string>
+    <string name="queryscore">成绩查询</string>
+    <string name="setting">设置</string>
+    
+    <!-- matchscoreactivity -->
+    <string name="leave_at_least_one_athlete">至少保留一个运动员</string>
+    <string name="leave_at_least_one_score">至少保留一个成绩</string>
+    <string name="adjust_finish_goto_statistics">调整完毕，进入统计页面</string>
 </resources>

@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
 			viewBean.setHome(i);
 			viewBean.setColor(i);
 			viewBean.setTextsize(22);
-			viewBean.setTexts(setName(i));
+			viewBean.setTexts(getNameStrById(i));
 			imageViews = new SexangleImageViews(this, viewBean);
 			imageViews.setId(ID + i);
 			imageViews.setOnSexangleImageClick(listener);
@@ -99,19 +99,24 @@ public class MainActivity extends Activity {
 	 * @param i
 	 * @return
 	 */
-	public String setName(int i) {
-		if (i == 0) {
-			return "运动员";
-		} else if (i == 1) {
-			return "计时器";
-		} else if (i == 2) {
-			return "小功能";
-		} else if (i == 3) {
-			return "成绩查询";
-		} else if (i == 4) {
-			return "设置";
+	public String getNameStrById(int i) {
+
+		
+		switch (i) {
+		case 0:
+			return getString(R.string.athlete);
+		case 1:
+			return getString(R.string.timer);
+		case 2:
+			return getString(R.string.otherfunctions);
+		case 3:
+			return getString(R.string.queryscore);
+		case 4:
+			return getString(R.string.setting);
+
+		default:
+			return "";
 		}
-		return "";
 	}
 
 	@Override

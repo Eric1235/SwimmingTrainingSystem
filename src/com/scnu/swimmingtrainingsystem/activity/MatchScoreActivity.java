@@ -103,7 +103,7 @@ public class MatchScoreActivity extends Activity implements
 				dragAdapter.remove(dragAdapter.getItem(which));
 			} else {
 				CommonUtils.showToast(MatchScoreActivity.this, mToast,
-						"至少要保留一个运动员");
+						getString(R.string.leave_at_least_one_athlete));
 			}
 			dragAdapter.notifyDataSetChanged();
 		}
@@ -128,7 +128,7 @@ public class MatchScoreActivity extends Activity implements
 				scores.remove(which);
 			} else {
 				CommonUtils.showToast(MatchScoreActivity.this, mToast,
-						"至少要保留一个成绩");
+						getString(R.string.leave_at_least_one_score));
 			}
 			adapter.notifyDataSetChanged();
 		}
@@ -174,8 +174,9 @@ public class MatchScoreActivity extends Activity implements
 		Long planId = (Long) app.getMap().get(Constants.PLAN_ID);
 		plan = DataSupport.find(Plan.class, planId);
 		// 设置数据源
-		String[] autoStrings = new String[] { "25", "50", "75", "100", "125",
-				"150", "175", "200", "225", "250", "275", "300" };
+//		String[] autoStrings = new String[] { "25", "50", "75", "100", "125",
+//				"150", "175", "200", "225", "250", "275", "300" };
+		String[] autoStrings = getResources().getStringArray(R.array.swim_length);
 		acTextView = (AutoCompleteTextView) findViewById(R.id.match_act_current_distance);
 		ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, autoStrings);
@@ -191,7 +192,7 @@ public class MatchScoreActivity extends Activity implements
 		int totalDistance = plan.getDistance();
 		if (totalDistance <= intervalDistance * numberth) {
 			btNextTiming.setVisibility(View.GONE);
-			btStatistics.setText("调整完毕，进入统计页面");
+			btStatistics.setText(getString(R.string.adjust_finish_goto_statistics));
 		}
 
 		dragDatas = (List<String>) app.getMap().get(Constants.DRAG_NAME_LIST);
@@ -258,7 +259,7 @@ public class MatchScoreActivity extends Activity implements
 		if (isConnected) {
 			if (loadingDialog == null) {
 				loadingDialog = LoadingDialog.createDialog(this);
-				loadingDialog.setMessage("正在提交...");
+				loadingDialog.setMessage(getString(R.string.onSubmitting));
 				loadingDialog.setCanceledOnTouchOutside(false);
 			}
 			loadingDialog.show();

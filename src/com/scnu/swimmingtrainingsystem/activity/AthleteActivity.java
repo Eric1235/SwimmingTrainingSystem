@@ -87,6 +87,8 @@ public class AthleteActivity extends Activity {
 	private EditText mAthleteContact;
 	// 运动员备注编辑框
 	private EditText mOthers;
+	//运动员编号编辑框
+	private EditText mAthleteNumber;
 	// 运动员性别切换按钮
 	private Switch mGenderSwitch;
 	// 是否能连接服务器
@@ -181,12 +183,14 @@ public class AthleteActivity extends Activity {
 						String phone = mAthleteContact.getText().toString()
 								.trim();
 						String other = mOthers.getText().toString().trim();
+						
+						String number = mAthleteNumber.getText().toString().trim();
 
 						boolean isCheck = mGenderSwitch.isChecked();
 
-						String gender = "男";
+						String gender = getString(R.string.male);
 						if (!isCheck) {
-							gender = "女";
+							gender = getString(R.string.female);
 						}
 						boolean isExit = mDbManager.isAthleteNameExsit(mUserId,
 								name);
@@ -202,7 +206,7 @@ public class AthleteActivity extends Activity {
 								age = Integer.parseInt(ageString);
 							}
 
-							addAthlete(name, age, gender, phone, other);
+							addAthlete(name, age, gender, phone, other,number);
 							addDialog.dismiss();
 						}
 					}
@@ -213,6 +217,7 @@ public class AthleteActivity extends Activity {
 		mAthleteContact = (EditText) window.findViewById(R.id.add_et_contact);
 		mOthers = (EditText) window.findViewById(R.id.add_et_extra);
 		mGenderSwitch = (Switch) window.findViewById(R.id.toggle_gender);
+		mAthleteNumber = (EditText) window.findViewById(R.id.add_et_number);
 
 	}
 
@@ -231,7 +236,7 @@ public class AthleteActivity extends Activity {
 	 *            运动员其他信息
 	 */
 	public void addAthlete(String name, int age, String gender, String contact,
-			String others) {
+			String others,String number) {
 
 		Athlete a = new Athlete();
 		a.setName(name);
@@ -239,6 +244,7 @@ public class AthleteActivity extends Activity {
 		a.setGender(gender);
 		a.setPhone(contact);
 		a.setExtras(others);
+		a.setNumber(number);
 
 		if (isConnect) {
 			if (loadingDialog == null) {
