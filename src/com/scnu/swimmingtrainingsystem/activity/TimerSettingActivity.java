@@ -2,6 +2,7 @@
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -79,6 +80,9 @@ public class TimerSettingActivity extends Activity {
 	 */
 	private List<String> chosenAthletes = new ArrayList<String>();
 	private Spinner poolSpinner;
+	
+	//泳姿选择
+	private Spinner strokeSpinner;
 
 	private Toast toast;
 	private SparseBooleanArray map = new SparseBooleanArray();
@@ -107,18 +111,21 @@ public class TimerSettingActivity extends Activity {
 		dbManager = DBManager.getInstance();
 		chosenListView = (ListView) findViewById(R.id.list_choosed);
 		poolSpinner = (Spinner) findViewById(R.id.pool_length);
+		strokeSpinner = (Spinner) findViewById(R.id.stroke);
 		acTextView = (AutoCompleteTextView) findViewById(R.id.tv_distance);
-		String[] autoStrings = new String[] { "25", "50", "75", "100", "125",
-				"150", "175", "200", "225", "250", "275", "300", "325", "350",
-				"375", "400" };
+//		String[] autoStrings = new String[] { "25", "50", "75", "100", "125",
+//				"150", "175", "200", "225", "250", "275", "300", "325", "350",
+//				"375", "400" };
+		String[] autoStrings = getResources().getStringArray(R.array.swim_length);
 		ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, autoStrings);
 		acTextView.setAdapter(tipsAdapter);
 		acTextView.setDropDownHeight(350);
 		acTextView.setThreshold(1);
 		actInterval = (AutoCompleteTextView) findViewById(R.id.act_interval);
-		String[] autoIntervals = new String[] { "25米", "50米", "75米", "100米",
-				"125米", "150米", "175米", "200米", "250米", "300米", };
+//		String[] autoIntervals = new String[] { "25米", "50米", "75米", "100米",
+//				"125米", "150米", "175米", "200米", "250米", "300米", };
+		String[] autoIntervals = getResources().getStringArray(R.array.swim_length);
 		ArrayAdapter<String> intervalsAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, autoIntervals);
 		actInterval.setAdapter(intervalsAdapter);
@@ -164,13 +171,24 @@ public class TimerSettingActivity extends Activity {
 		actInterval.setText(swimInterval);
 		acTextView.setText(swimDistance);
 		List<String> poolLength = new ArrayList<String>();
-		poolLength.add("25米池");
-		poolLength.add("50米池");
+		List<String> stroke = new ArrayList<String>();
+		String[] strokes = getResources().getStringArray(R.array.strokestrarray);
+		String[] poolLengths = getResources().getStringArray(R.array.pool_length);
+//		poolLength.add("25米池");
+//		poolLength.add("50米池");
+//		poolLength.add(poolLengths);
+		Collections.addAll(poolLength, poolLengths);
+		Collections.addAll(stroke,strokes);
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, stroke);
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, poolLength);
 		adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		poolSpinner.setAdapter(adapter1);
 		poolSpinner.setSelection(selectedPositoin);
+		strokeSpinner.setAdapter(adapter2);
+		strokeSpinner.setSelection(selectedPositoin);
 		showChosenAthleteAdapter = new ShowChosenAthleteAdapter(
 				TimerSettingActivity.this, chosenAthletes);
 		chosenListView.setAdapter(showChosenAthleteAdapter);

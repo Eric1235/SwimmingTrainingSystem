@@ -81,17 +81,17 @@ public class ModifyPassActivity extends Activity {
 		String name = dbManager.getUser(userId).getUsername();
 		String userPass = dbManager.getUser(userId).getPassword();
 		if (TextUtils.isEmpty(oldPassword)) {
-			CommonUtils.showToast(this, toast, "原密码不能为空！");
+			CommonUtils.showToast(this, toast, getString(R.string.old_pwd_not_null));
 		} else if (TextUtils.isEmpty(newPassword)) {
-			CommonUtils.showToast(this, toast, "新密码不能为空！");
+			CommonUtils.showToast(this, toast, getString(R.string.new_pwd_not_null));
 		} else if (TextUtils.isEmpty(comfPassword)) {
-			CommonUtils.showToast(this, toast, "确认密码不能为空！");
+			CommonUtils.showToast(this, toast, getString(R.string.confirm_pwd_not_null));
 		} else if (!userPass.equals(oldPassword)) {
-			CommonUtils.showToast(this, toast, "原密码错误！");
+			CommonUtils.showToast(this, toast, getString(R.string.old_pwd_wrong));
 		} else if (userPass.equals(newPassword)) {
-			CommonUtils.showToast(this, toast, "原密码与新密码相同，无需修改！");
+			CommonUtils.showToast(this, toast, getString(R.string.new_pwd_the_same_with_the_old));
 		} else if (name.equals("defaultUser")) {
-			CommonUtils.showToast(this, toast, "当前为系统默认帐号，不能修改密码！");
+			CommonUtils.showToast(this, toast, getString(R.string.the_default_account_cannot_be_modified));
 		} else {
 			dbManager.modifyUserPassword(userId, comfPassword);
 		
@@ -101,14 +101,14 @@ public class ModifyPassActivity extends Activity {
 			if (isConnect) {
 				if (loadingDialog == null) {
 					loadingDialog = LoadingDialog.createDialog(this);
-					loadingDialog.setMessage("正在提交请求...");
+					loadingDialog.setMessage(getString(R.string.onSubmitting));
 					loadingDialog.setCanceledOnTouchOutside(false);
 				}
 				loadingDialog.show();
 				// 发送至服务器
 				modifyRequest(oldPassword, newPassword, comfPassword);
 			}else {
-				CommonUtils.showToast(this, toast, "修改密码成功！");
+				CommonUtils.showToast(this, toast, getString(R.string.modify_succeed));
 				finish();
 			}
 			
@@ -141,7 +141,7 @@ public class ModifyPassActivity extends Activity {
 							int resCode = (Integer) obj.get("resCode");
 							if (resCode == 1) {
 								CommonUtils.showToast(ModifyPassActivity.this,
-										toast, "修改成功！");
+										toast, getString(R.string.modify_succeed));
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block

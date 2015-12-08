@@ -294,10 +294,10 @@ public class MatchScoreActivity extends Activity implements
 
 		if (nowCurrent == 1) {
 			if (crrentDistance == 0 && TextUtils.isEmpty(actv)) {
-				CommonUtils.showToast(this, mToast, "请填写记录当前成绩的距离！");
+				CommonUtils.showToast(this, mToast, getString(R.string.fill_in_scores_distance));
 				return;
 			} else if (scoresNumber != athleteNumber) {
-				CommonUtils.showToast(this, mToast, "成绩数目与运动员数目不相等！");
+				CommonUtils.showToast(this, mToast, getString(R.string.score_num_not_equalwith_athlete_num));
 				return;
 			} else {
 				// 如果这是第一趟并且成绩数目与运动员数目相等，则直接保存到数据库
@@ -349,15 +349,15 @@ public class MatchScoreActivity extends Activity implements
 			final int crrentDistance, final String scoreString,
 			final String athleteString) {
 		AlertDialog.Builder build = new AlertDialog.Builder(this);
-		build.setTitle("系统提示").setMessage(
-				"是否开始下一趟计时？ \n选择【否】则返回调整成绩或者运动员数目,或者结束本轮计时\n选择【是】则直接开始下一趟计时");
-		build.setNegativeButton("否", new DialogInterface.OnClickListener() {
+		build.setTitle(getString(R.string.system_hint)).setMessage(
+				getString(R.string.goto_next_timer_or_adjust_score));
+		build.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 			}
 		});
-		build.setPositiveButton("是", new DialogInterface.OnClickListener() {
+		build.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -462,14 +462,14 @@ public class MatchScoreActivity extends Activity implements
 							int planId = (Integer) obj.get("plan_id");
 							if (resCode == 1) {
 								CommonUtils.showToast(MatchScoreActivity.this,
-										mToast, "成功同步至服务器!");
+										mToast, getString(R.string.synchronized_success));
 								ContentValues values = new ContentValues();
 								values.put("pid", planId);
 								Plan.updateAll(Plan.class, values,
 										String.valueOf(plan.getId()));
 							} else {
 								CommonUtils.showToast(MatchScoreActivity.this,
-										mToast, "同步失敗！");
+										mToast, getString(R.string.synchronized_failed));
 							}
 
 						} catch (JSONException e) {
@@ -517,7 +517,7 @@ public class MatchScoreActivity extends Activity implements
 		// TODO Auto-generated method stub
 		TextView copyView = (TextView) getLayoutInflater().inflate(
 				android.R.layout.simple_list_item_1, null);
-		copyView.setText("复制添加该项");
+		copyView.setText(getString(R.string.copy_add));
 		copyView.setTextColor(getResources().getColor(R.color.white));
 		final PopupWindow pop = new PopupWindow(copyView,
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);

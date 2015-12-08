@@ -1,8 +1,10 @@
 ﻿package com.scnu.swimmingtrainingsystem.activity;
 
 import com.scnu.swimmingtrainingsystem.R;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap.Config;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.scnu.swimmingtrainingsystem.model.ViewBean;
+import com.scnu.swimmingtrainingsystem.util.AppConfig;
 import com.scnu.swimmingtrainingsystem.util.Constants;
 import com.scnu.swimmingtrainingsystem.view.SexangleImageViews;
 import com.scnu.swimmingtrainingsystem.view.SexangleImageViews.OnSexangleImageClickListener;
@@ -85,7 +88,7 @@ public class MainActivity extends Activity {
 			viewBean.setHome(i);
 			viewBean.setColor(i);
 			viewBean.setTextsize(22);
-			viewBean.setTexts(getNameStrById(i));
+			viewBean.setTexts(getString(AppConfig.getFunctionStrById(i)));
 			imageViews = new SexangleImageViews(this, viewBean);
 			imageViews.setId(ID + i);
 			imageViews.setOnSexangleImageClick(listener);
@@ -93,31 +96,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/**
-	 * 设置六边形对应名字
-	 * 
-	 * @param i
-	 * @return
-	 */
-	public String getNameStrById(int i) {
-
-		
-		switch (i) {
-		case 0:
-			return getString(R.string.athlete);
-		case 1:
-			return getString(R.string.timer);
-		case 2:
-			return getString(R.string.otherfunctions);
-		case 3:
-			return getString(R.string.queryscore);
-		case 4:
-			return getString(R.string.setting);
-
-		default:
-			return "";
-		}
-	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
