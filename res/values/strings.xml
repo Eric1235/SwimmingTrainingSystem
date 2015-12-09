@@ -13,6 +13,7 @@
     <string name="quit_app">再按一次退出程序</string>
     <string name="action_settings">Settings</string>
     <string name="dont_need_to_save_again">成绩已经保存，无需再次保存!</string>
+    <string name="date_picker_title">日期选择：</string>
     <string name="stroke">泳姿</string>
     <string name="on">男</string>
     <string name="off">女</string>
@@ -112,4 +113,17 @@
     <!-- otherfunctionactivity -->
     
     
+    <!-- timersettingactivity -->
+    <string name="set_total_length">请设置本轮计时的总距离</string>
+    <string name="set_timer_interval_length">请设置本轮计时了时间间隔距离</string>
+    <string name="interval_length_cannot_loger_than_total_length">计时间隔距离不能大于总距离</string>
+    <string name="add_athlete_before_timer">请添加运动员后再开始计时</string>
+    
+    <!-- timeractivity -->
+    <string name="No_timer">第 %s 几次计时</string>
+    <string name="No_1">第一名</string>
+    <string name="No_n">第 %d 名</string>
+    <string name="score_record_done">全部成绩记录完成</string>
+    <string name="dont_save_more_score">不要保存太多不必要的成绩</string>
+    <string name="time_reset">00:00:00</string>
 </resources>

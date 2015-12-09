@@ -89,6 +89,13 @@ public class CommonUtils {
 		editor.putInt(Constants.SELECTED_POOL, position);
 		editor.commit();
 	}
+	
+	public static void saveSelectedStroke(Context context,int position){
+		SharedPreferences sp = context.getSharedPreferences(Constants.LOGININFO, Context.MODE_PRIVATE);
+		Editor editor = sp.edit();
+		editor.putInt(Constants.SELECTED_STROKE, position);
+		editor.commit();
+	}
 
 	/**
 	 * 记录预计的游泳总距离

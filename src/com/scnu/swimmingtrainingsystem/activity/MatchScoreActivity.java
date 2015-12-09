@@ -174,8 +174,6 @@ public class MatchScoreActivity extends Activity implements
 		Long planId = (Long) app.getMap().get(Constants.PLAN_ID);
 		plan = DataSupport.find(Plan.class, planId);
 		// 设置数据源
-//		String[] autoStrings = new String[] { "25", "50", "75", "100", "125",
-//				"150", "175", "200", "225", "250", "275", "300" };
 		String[] autoStrings = getResources().getStringArray(R.array.swim_length);
 		acTextView = (AutoCompleteTextView) findViewById(R.id.match_act_current_distance);
 		ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(this,
@@ -426,6 +424,7 @@ public class MatchScoreActivity extends Activity implements
 		sp.setDistance(plan.getDistance());
 		sp.setPool(plan.getPool());
 		sp.setExtra(plan.getExtra());
+		sp.setStrokeNumber(plan.getStrokeNumber());
 
 		List<SmallScore> smallScores = new ArrayList<SmallScore>();
 		List<Score> scoresResult = mDbManager.getScoreByDate(date);
@@ -443,6 +442,7 @@ public class MatchScoreActivity extends Activity implements
 		Map<String, Object> scoreMap = new HashMap<String, Object>();
 		scoreMap.put("score", smallScores);
 		scoreMap.put("plan", sp);
+		scoreMap.put("stroke", plan.getStrokeNumber());
 		scoreMap.put("uid", user.getUid());
 		scoreMap.put("athlete_id", aidList);
 		scoreMap.put("type", 1);
