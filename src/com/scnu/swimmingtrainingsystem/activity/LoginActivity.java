@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -91,6 +92,7 @@ public class LoginActivity extends Activity {
 		etPassword.setText(passwrod);
 		mQueue = Volley.newRequestQueue(this);
 		boolean isFirst = sp.getBoolean("isFirst", true);
+	
 		if (isFirst) {
 			User defaulrUser = new User();
 			defaulrUser.setId(1L);
@@ -207,19 +209,27 @@ public class LoginActivity extends Activity {
 						try {
 							JSONObject obj = new JSONObject(response);
 							int resCode = (Integer) obj.get("resCode");
+//							Log.d("lixinkun", response);
 							if (resCode == 1) {
 								CommonUtils.showToast(LoginActivity.this,
 										toast, getString(R.string.login_success));
 								String userJson = obj.get("user").toString();
+//								Log.d("lixinkun", "userJson = " + userJson);
 								User user = JsonTools.getObject(userJson,
 										User.class);
+								
 								int uid = (Integer) obj.get("uid");
 								user.setUid(uid);
-								if (dbManager.getUserByName(user.getUsername()) == null) {
-									// 如果数据库中不存在该用户，则直接将该用户保存至数据库
+//								Log.d("lixinkun", ""
+//										+ "user = " + user.toString());
+								//判断当前用户是否存在与数据库
+							
+								if (dbManager.getUserByUid(uid) == null) {
+//									Log.d("lixinkun", "user first login");
 									user.save();
 									app.getMap().put(Constants.CURRENT_USER_ID,
-											user.getId());
+											user.getUid());
+//									Log.d("lixinkun","uid = " + user.getUid());
 									// 用户第一次登陆
 									CommonUtils.saveIsThisUserFirstLogin(
 											LoginActivity.this, true);
@@ -229,11 +239,16 @@ public class LoginActivity extends Activity {
 											LoginActivity.this, "");
 								} else {
 									// 如果该用户信息已存在本地数据库，则取出当前id作为全局变量
-									long currentId = dbManager.getUserByName(
-											user.getUsername()).getId();
+//									Log.d("lixinkun", "user not first login");
+									int logineduid = dbManager.getUserByUid(uid).getUid();
+									
+//									Log.d("lixinkun","logineduid = " + logineduid);
 									app.getMap().put(Constants.CURRENT_USER_ID,
-											currentId);
+											logineduid);
 								}
+								
+								
+								
 							} else if (resCode == 2) {
 								CommonUtils.showToast(LoginActivity.this,
 										toast, getString(R.string.user_donot_exists));
@@ -252,18 +267,18 @@ public class LoginActivity extends Activity {
 
 						CommonUtils
 								.showToast(LoginActivity.this, toast, getString(R.string.login_success));
-
+					
 						Handler handler = new Handler();
 						Runnable updateThread = new Runnable() {
 							public void run() {
-								Intent intent = new Intent(LoginActivity.this,
-										MainActivity.class);
+								Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 								LoginActivity.this.startActivity(intent);
+								
 								overridePendingTransition(R.anim.push_right_in,
 										R.anim.push_left_out);
 							}
 						};
-						handler.postDelayed(updateThread, 800);
+						handler.postDelayed(updateThread,800);
 					}
 				}, new ErrorListener() {
 
@@ -395,21 +410,21 @@ public class LoginActivity extends Activity {
 	 */
 	private void offlineLogin() {
 		// 连接服务器失败，则会使用离线功能登录，可以保存数据但暂时无法上传,只是功能试用
-		CommonUtils.showToast(LoginActivity.this, toast, getString(R.string.login_success_and_jump));
-		// 将当前用户id保存为全局变量
-		User user = dbManager.getUserByName("defaultUser");
-		app.getMap().put(Constants.CURRENT_USER_ID, user.getId());
-		Handler handler = new Handler();
-		Runnable updateThread = new Runnable() {
-			public void run() {
-				Intent intent = new Intent(LoginActivity.this,
-						MainActivity.class);
-				LoginActivity.this.startActivity(intent);
-				overridePendingTransition(R.anim.push_right_in,
-						R.anim.push_left_out);
-			}
-		};
-		handler.postDelayed(updateThread, 500);
+//		CommonUtils.showToast(LoginActivity.this, toast, getString(R.string.login_success_and_jump));
+//		// 将当前用户id保存为全局变量
+//		User user = dbManager.getUserByName("defaultUser");
+//		app.getMap().put(Constants.CURRENT_USER_ID, user.getId());
+//		Handler handler = new Handler();
+//		Runnable updateThread = new Runnable() {
+//			public void run() {
+//				Intent intent = new Intent(LoginActivity.this,
+//						MainActivity.class);
+//				LoginActivity.this.startActivity(intent);
+//				overridePendingTransition(R.anim.push_right_in,
+//						R.anim.push_left_out);
+//			}
+//		};
+//		handler.postDelayed(updateThread, 500);
 	}
 
 	/**
@@ -437,5 +452,17 @@ public class LoginActivity extends Activity {
 				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
 				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		mQueue.add(testRequest);
+	}
+	
+	class gotoMainActivityTask extends AsyncTask<Void, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent(LoginActivity.this,
+					MainActivity.class);
+			startActivity(intent);
+			return null;
+		}
 	}
 }

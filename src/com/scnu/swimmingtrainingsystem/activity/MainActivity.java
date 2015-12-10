@@ -59,6 +59,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+//		init();
 		try {
 			init();
 		} catch (Exception e) {
@@ -74,8 +75,8 @@ public class MainActivity extends Activity {
 		initView();
 		app = (MyApplication) getApplication();
 		app.addActivity(this);
-		@SuppressWarnings("unused")
-		long userID = (Long) app.getMap().get(Constants.CURRENT_USER_ID);
+//		@SuppressWarnings("unused")
+//		long userID = (Long) app.getMap().get(Constants.CURRENT_USER_ID);
 	}
 
 	/**

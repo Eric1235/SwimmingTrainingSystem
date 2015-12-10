@@ -126,4 +126,11 @@
     <string name="score_record_done">全部成绩记录完成</string>
     <string name="dont_save_more_score">不要保存太多不必要的成绩</string>
     <string name="time_reset">00:00:00</string>
+    
+    <!-- homeactivity -->
+    <string name="fragment_athlete">运动员</string>
+    <string name="fragment_consume">消费</string>
+    <string name="fragment_chart">图表</string>
+    <string name="fragment_all">记录</string>
+    <string name="fragment_more">更多</string>
 </resources>
