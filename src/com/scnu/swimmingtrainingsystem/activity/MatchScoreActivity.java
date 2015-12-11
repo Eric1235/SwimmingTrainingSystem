@@ -76,7 +76,7 @@ public class MatchScoreActivity extends Activity implements
 	private AutoCompleteTextView acTextView;
 	private DBManager mDbManager;
 	private boolean isConnected;
-	private Long userId;
+	private int userId;
 	private Plan plan;
 	private LoadingDialog loadingDialog;
 	private RequestQueue mQueue;
@@ -170,7 +170,7 @@ public class MatchScoreActivity extends Activity implements
 		nameListView.setDragScrollProfile(ssProfile);
 
 		scoreListView.setRemoveListener(onRemove2);
-		userId = (Long) app.getMap().get(Constants.CURRENT_USER_ID);
+		userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
 		Long planId = (Long) app.getMap().get(Constants.PLAN_ID);
 		plan = DataSupport.find(Plan.class, planId);
 		// 设置数据源
@@ -438,7 +438,7 @@ public class MatchScoreActivity extends Activity implements
 			smallScores.add(smScore);
 		}
 		List<Integer> aidList = mDbManager.getAthlteAidInScoreByDate(date);
-		User user = mDbManager.getUser(userId);
+		User user = mDbManager.getUserByUid(userId);
 		Map<String, Object> scoreMap = new HashMap<String, Object>();
 		scoreMap.put("score", smallScores);
 		scoreMap.put("plan", sp);

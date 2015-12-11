@@ -53,7 +53,7 @@
             android:padding="3dp"
             android:text="本地查询"
             android:textColor="@color/aliceblue"
-            android:textSize="17.0sp" />
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/btn_1"

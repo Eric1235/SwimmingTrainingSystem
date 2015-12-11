@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="@color/common_bg"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/clockset_headbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#3D8BFF"
+        android:background="@color/title_bar_bg"
         android:gravity="center_vertical" >
 
         <TextView
@@ -160,23 +161,23 @@
                     android:id="@+id/et_remarks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/bg_edit"
                     android:hint="输入备注，方便查阅区分成绩"
                     android:singleLine="true" />
             </LinearLayout>
         </LinearLayout>
 
         <Button
+            style="@style/custom_btn"
             android:id="@+id/bt_choose_athlete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/choose_plan_ll1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/startback"
             android:onClick="chooseAthlete"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="选择运动员" />
 
         <ListView
@@ -191,20 +192,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#33000000"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="8dp" >
 
         <Button
+            style="@style/custom_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_reset"
             android:onClick="startTiming"
             android:padding="6dp"
-            android:text="开始计时"
-            android:textColor="@color/aliceblue" />
+            android:text="开始计时" />
     </LinearLayout>
 
 </LinearLayout>

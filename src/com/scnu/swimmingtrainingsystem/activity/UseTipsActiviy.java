@@ -50,7 +50,7 @@ public class UseTipsActiviy extends Activity {
 	private void init() {
 		application=(MyApplication) getApplication();
 		@SuppressWarnings("unused")
-		long userID = (Long) application.getMap().get(Constants.CURRENT_USER_ID);
+		int userID = (Integer) application.getMap().get(Constants.CURRENT_USER_ID);
 		btnBack = (ImageButton) findViewById(R.id.btn_back);
 		btnBack.setOnClickListener(new OnClickListener() {
 			

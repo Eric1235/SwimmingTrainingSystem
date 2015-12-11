@@ -40,7 +40,8 @@ public class ModifyPassActivity extends Activity {
 	private EditText modify_comfirmpass;
 	private RequestQueue mQueue;
 	private Toast toast;
-	private Long userId;
+	private int userId;
+	private User user;
 	private LoadingDialog loadingDialog;
 
 	@Override
@@ -60,8 +61,9 @@ public class ModifyPassActivity extends Activity {
 
 	private void init() {
 		app = (MyApplication) getApplication();
-		userId = (Long) app.getMap().get(Constants.CURRENT_USER_ID);
+		userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
 		dbManager = DBManager.getInstance();
+		user = dbManager.getUserByUid(userId);
 		modify_oldpass = (EditText) findViewById(R.id.modify_oldpass);
 		modify_newpass = (EditText) findViewById(R.id.modify_newpass);
 		modify_comfirmpass = (EditText) findViewById(R.id.modify_comfirmpass);
@@ -78,8 +80,9 @@ public class ModifyPassActivity extends Activity {
 		String newPassword = modify_newpass.getText().toString().trim();
 		String comfPassword = modify_comfirmpass.getText().toString().trim();
 
-		String name = dbManager.getUser(userId).getUsername();
-		String userPass = dbManager.getUser(userId).getPassword();
+//		User queryUser = dbManager.getUserByUid(userId);
+		String name = user.getUsername();
+		String userPass = user.getPassword();
 		if (TextUtils.isEmpty(oldPassword)) {
 			CommonUtils.showToast(this, toast, getString(R.string.old_pwd_not_null));
 		} else if (TextUtils.isEmpty(newPassword)) {
@@ -142,6 +145,7 @@ public class ModifyPassActivity extends Activity {
 							if (resCode == 1) {
 								CommonUtils.showToast(ModifyPassActivity.this,
 										toast, getString(R.string.modify_succeed));
+								
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -163,7 +167,7 @@ public class ModifyPassActivity extends Activity {
 			protected Map<String, String> getParams() throws AuthFailureError {
 				// 设置请求参数
 				Map<String, String> map = new HashMap<String, String>();
-				User user = dbManager.getUser(userId);
+//				User user = dbManager.getUserByUid(userId);
 				map.put("uid", user.getUid() + "");
 				map.put("newPass", newPassword);
 				return map;

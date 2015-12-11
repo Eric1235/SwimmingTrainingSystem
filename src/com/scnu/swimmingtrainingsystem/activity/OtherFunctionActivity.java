@@ -84,7 +84,7 @@ public class OtherFunctionActivity extends FragmentActivity implements
 		// TODO Auto-generated method stub
 		MyApplication app=(MyApplication) getApplication();
 		@SuppressWarnings("unused")
-		Long userId = (Long) app.getMap().get(Constants.CURRENT_USER_ID);
+		int userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
 		viewpager = (ViewPager) findViewById(R.id.vp_fuction);
 		tvDash = (TextView) findViewById(R.id.tvTag1);
 		tvDash.setOnClickListener(this);

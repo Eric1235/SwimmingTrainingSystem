@@ -86,7 +86,7 @@ public class TimerSettingActivity extends Activity {
 
 	private Toast toast;
 	private SparseBooleanArray map = new SparseBooleanArray();
-	private Long userid;
+	private int userid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +142,7 @@ public class TimerSettingActivity extends Activity {
 		SparseBooleanArray configArray = JsonTools.getObject(mapConfigString,
 				SparseBooleanArray.class);
 		app.getMap().put(Constants.CURRENT_SWIM_TIME, 0);
-		userid = (Long) app.getMap().get(Constants.CURRENT_USER_ID);
+		userid = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
 		athletes = dbManager.getAthletes(userid);
 		for (Athlete ath : athletes) {
 			athleteNames.add(ath.getName());

@@ -42,6 +42,7 @@
         android:id="@+id/ll_match_dash2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_below="@id/match_dash_headbar"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -71,31 +72,30 @@
         android:id="@+id/ll_match_dash_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:padding="5dp" >
+        android:gravity="center_vertical" >
 
         <Button
+            style="@style/custom_btn"
             android:id="@+id/bt_dash_reload"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@drawable/startback"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
             android:onClick="reLoad"
-            android:text="重新载入数据 "
-            android:textColor="@color/aliceblue"
-            android:textSize="20sp" />
+            android:text="@string/reload_data"
+             />
 
         <Button
+            style="@style/custom_btn"
             android:id="@+id/bt_match_dash_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="4dp"
             android:layout_weight="1.0"
-            android:background="@drawable/startback"
             android:onClick="saveScores"
-            android:text="保存"
-            android:textSize="20sp" />
+            android:text="@string/save" />
     </LinearLayout>
 
 </RelativeLayout>

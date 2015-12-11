@@ -135,10 +135,7 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				LoginActivity.this.startActivity(new Intent(LoginActivity.this,
-						RetrievePasswordActivity.class));
-				overridePendingTransition(R.anim.push_right_in,
-						R.anim.push_left_out);
+				gotoForgetPwd();
 			}
 		});
 	}
@@ -149,9 +146,7 @@ public class LoginActivity extends Activity {
 	 * @param v
 	 */
 	public void onRegister(View v) {
-		Intent i = new Intent(this, RegistAcyivity.class);
-		startActivity(i);
-		overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+		gotoRegister();
 	}
 
 	/**
@@ -247,6 +242,7 @@ public class LoginActivity extends Activity {
 											logineduid);
 								}
 								
+								gotoMainActivity();
 								
 								
 							} else if (resCode == 2) {
@@ -265,20 +261,6 @@ public class LoginActivity extends Activity {
 							e.printStackTrace();
 						}
 
-						CommonUtils
-								.showToast(LoginActivity.this, toast, getString(R.string.login_success));
-					
-						Handler handler = new Handler();
-						Runnable updateThread = new Runnable() {
-							public void run() {
-								Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-								LoginActivity.this.startActivity(intent);
-								
-								overridePendingTransition(R.anim.push_right_in,
-										R.anim.push_left_out);
-							}
-						};
-						handler.postDelayed(updateThread,800);
 					}
 				}, new ErrorListener() {
 
@@ -288,7 +270,9 @@ public class LoginActivity extends Activity {
 						// Log.e(TAG, error.getMessage());
 						loadingDialog.dismiss();
 						app.getMap().put(Constants.IS_CONNECT_SERVER, false);
-						showUserSelectDialog();
+						CommonUtils
+						.showToast(LoginActivity.this, toast, getString(R.string.network_error));
+//						showUserSelectDialog();
 					}
 				}) {
 
@@ -454,15 +438,43 @@ public class LoginActivity extends Activity {
 		mQueue.add(testRequest);
 	}
 	
-	class gotoMainActivityTask extends AsyncTask<Void, Void, Void>{
+	/**
+	 * 跳转到主界面
+	 */
+	private void gotoMainActivity(){
+		CommonUtils
+		.showToast(LoginActivity.this, toast, getString(R.string.login_success));
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			Intent intent = new Intent(LoginActivity.this,
-					MainActivity.class);
-			startActivity(intent);
-			return null;
-		}
+		Handler handler = new Handler();
+		Runnable updateThread = new Runnable() {
+			public void run() {
+				Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+				LoginActivity.this.startActivity(intent);
+		
+				overridePendingTransition(R.anim.push_right_in,
+						R.anim.push_left_out);
+			}
+		};
+		handler.postDelayed(updateThread,800);
 	}
+	
+	/**
+	 * 跳转到忘记密码
+	 */
+	private void gotoForgetPwd(){
+		LoginActivity.this.startActivity(new Intent(LoginActivity.this,
+				RetrievePasswordActivity.class));
+		overridePendingTransition(R.anim.push_right_in,
+				R.anim.push_left_out);
+	}
+	
+	/**
+	 * 跳转到注册页面
+	 */
+	private void gotoRegister(){
+		Intent i = new Intent(this, RegistAcyivity.class);
+		startActivity(i);
+		overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+	}
+
 }
