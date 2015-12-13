@@ -221,7 +221,7 @@ public class TimerActivity extends Activity {
 				map.put("athlete_ranking", getString(R.string.No_1));
 			} else {
 				map.put("score_between", timesub.get(i - 2));
-				map.put("athlete_ranking", String.format(getString(R.string.No_n), i));
+				map.put("athlete_ranking", String.valueOf(i));
 			}
 			listItem.add(map);
 		}

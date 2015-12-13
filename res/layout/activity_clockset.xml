@@ -14,13 +14,13 @@
         android:gravity="center_vertical" >
 
         <TextView
+            style="@style/custom_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="计时准备"
-            android:textColor="#fff"
-            android:textSize="20sp" />
+            android:text="@string/timer_setting"
+             />
 
         <ImageButton
             android:id="@+id/plan_back"
@@ -65,7 +65,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="泳池大小"
+                        android:text="@string/pool_length"
                         android:textColor="@color/aliceblue" />
 
                     <Spinner
@@ -85,7 +85,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="泳姿选择"
+                        android:text="@string/choose_stroke"
                         android:textColor="@color/aliceblue" />
 
                     <Spinner
@@ -111,12 +111,12 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:ems="5"
-                    android:hint="计时间隔"
+                    android:hint="@string/time_interval"
                     android:inputType="number"
                     android:nextFocusLeft="@+id/bt_choose_athlete"
                     android:nextFocusUp="@+id/pool_length"
                     android:singleLine="true"
-                    android:textColor="@color/dark_orange"
+                    android:textColor="@color/color_text"
                     android:textSize="14sp" />
                 
                    <LinearLayout
@@ -135,12 +135,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:ems="5"
-                        android:hint="游泳总距离"
+                        android:hint="@string/swim_total_length"
                         android:inputType="number"
                         android:nextFocusLeft="@+id/bt_choose_athlete"
                         android:nextFocusUp="@+id/pool_length"
                         android:singleLine="true"
-                        android:textColor="@color/dark_orange"
+                        android:textColor="@color/color_text"
                         android:textSize="15sp" />
 
                     <TextView
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edit"
-                    android:hint="输入备注，方便查阅区分成绩"
+                    android:hint="@string/input_extra"
                     android:singleLine="true" />
             </LinearLayout>
         </LinearLayout>
@@ -178,7 +178,7 @@
             android:onClick="chooseAthlete"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:text="选择运动员" />
+            android:text="@string/choose_athlete" />
 
         <ListView
             android:id="@+id/list_choosed"
@@ -203,7 +203,7 @@
             android:layout_weight="1"
             android:onClick="startTiming"
             android:padding="6dp"
-            android:text="开始计时" />
+            android:text="@string/start_timer" />
     </LinearLayout>
 
 </LinearLayout>

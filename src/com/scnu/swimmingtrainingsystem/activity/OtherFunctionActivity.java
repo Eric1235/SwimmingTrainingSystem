@@ -184,7 +184,7 @@ public class OtherFunctionActivity extends FragmentActivity implements
 		}
 		animation.setFillAfter(true);
 		animation.setDuration(300);
-		cursor.startAnimation(animation);
+//		cursor.startAnimation(animation);
 	}
 
 	class MyFrageStatePagerAdapter extends FragmentStatePagerAdapter {

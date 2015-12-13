@@ -67,7 +67,7 @@ public class MatchSprintScoreActivity extends Activity {
 	private MyApplication app;
 	private DBManager mDbManager;
 	private boolean isConnected;
-	private Long userId;
+	private int userId;
 	private Toast mToast;
 	private View mLayout, mLayout2;
 	private RequestQueue mQueue;
@@ -167,7 +167,7 @@ public class MatchSprintScoreActivity extends Activity {
 				android.R.layout.simple_spinner_dropdown_item, dashDistanceList);
 		distanceSpinner.setAdapter(spinerAdapter);
 		distanceSpinner.setSelection(2);
-		userId = (Long) app.getMap().get(Constants.CURRENT_USER_ID);
+		userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
 		scores = getIntent().getStringArrayListExtra("SCORES");
 		originScores.addAll(scores);
 		List<Athlete> athletes = mDbManager.getAthletes(userId);
@@ -325,7 +325,7 @@ public class MatchSprintScoreActivity extends Activity {
 		List<Integer> athList = new ArrayList<Integer>();
 		scoresResult.addAll(mDbManager.getScoreByDate(date));
 		athList.addAll(athIds);
-		User user = mDbManager.getUser(userId);
+		User user = mDbManager.getUserByUid(userId);
 		Map<String, Object> scoreMap = new HashMap<String, Object>();
 		scoreMap.put("score", scoresResult);
 		scoreMap.put("plan", null);

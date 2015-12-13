@@ -46,7 +46,7 @@
         android:layout_marginRight="4dp"
         android:layout_centerVertical="true"
         android:onClick="onRegister"
-        android:text="快速注册" />
+        android:text="@string/quick_regist" />
 
     <Button
         style="@style/custom_btn"
@@ -56,7 +56,6 @@
         android:layout_marginLeft="4dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:background="@drawable/bg_login"
         android:onClick="onLogin"
         android:text="立即登录"
         />
@@ -71,7 +70,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/tv_password"
         android:layout_marginBottom="20dp"
-        android:text="忘记密码？"
+        android:text="@string/forget_pwd"
         android:textColor="@color/light_gray" />
 
     <TextView
@@ -81,7 +80,7 @@
         android:layout_alignBaseline="@+id/forget_password"
         android:layout_alignBottom="@+id/forget_password"
         android:layout_alignLeft="@+id/tv_password"
-        android:text="设置服务器地址和端口"
+        android:text="@string/set_ip_and_port"
         android:textColor="@color/light_gray" />
 
 </RelativeLayout>

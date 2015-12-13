@@ -5,9 +5,12 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
 
 import com.scnu.swimmingtrainingsystem.R;
+
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -43,6 +46,7 @@ public class ModifyPassActivity extends Activity {
 	private int userId;
 	private User user;
 	private LoadingDialog loadingDialog;
+	private String newPassword;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +81,9 @@ public class ModifyPassActivity extends Activity {
 	 */
 	public void modify(View v) {
 		String oldPassword = modify_oldpass.getText().toString().trim();
-		String newPassword = modify_newpass.getText().toString().trim();
+		newPassword = modify_newpass.getText().toString().trim();
 		String comfPassword = modify_comfirmpass.getText().toString().trim();
 
-//		User queryUser = dbManager.getUserByUid(userId);
 		String name = user.getUsername();
 		String userPass = user.getPassword();
 		if (TextUtils.isEmpty(oldPassword)) {
@@ -143,6 +146,10 @@ public class ModifyPassActivity extends Activity {
 							obj = new JSONObject(response);
 							int resCode = (Integer) obj.get("resCode");
 							if (resCode == 1) {
+								//在网络更新以后，更新本地数据库
+								ContentValues values = new ContentValues();
+								values.put("password", newPassword);
+								DataSupport.updateAll(User.class, values, "password=?",oldPassword);
 								CommonUtils.showToast(ModifyPassActivity.this,
 										toast, getString(R.string.modify_succeed));
 								

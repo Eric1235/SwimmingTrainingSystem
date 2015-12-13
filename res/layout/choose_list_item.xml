@@ -30,7 +30,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:text="张三"
-        android:textColor="@color/black_black"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
 </RelativeLayout>

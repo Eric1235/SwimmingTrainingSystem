@@ -7,16 +7,16 @@
         android:id="@+id/match_dash_headbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#3D8BFF" >
+        android:background="@color/title_bar_bg" >
 
         <TextView
+            style="@style/custom_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="成绩运动员匹配"
-            android:textColor="#fff"
-            android:textSize="20sp" />
+            android:text="@string/match_score_athlete"
+             />
 
         <ImageButton
             android:id="@+id/match_back"
@@ -48,10 +48,11 @@
         android:orientation="horizontal" >
 
         <TextView
+            style="@style/custom_normal_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="冲刺距离"
-            android:textSize="20sp" />
+            android:text="@string/dash_length"
+             />
 
         <Spinner
             android:id="@+id/spinner_match_dash"

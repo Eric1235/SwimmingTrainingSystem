@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
+    android:background="@color/common_bg"
     android:orientation="vertical" >
     
       <RelativeLayout
@@ -10,16 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:background="#3D8BFF" >
+        android:background="@color/title_bar_bg" >
 
         <TextView
+            style="@style/custom_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="@string/user_tip"
-            android:textColor="#fff"
-            android:textSize="20sp" />
+            android:text="@string/other_function"
+             />
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -33,8 +33,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#EEEEEE" >
+        android:layout_height="32dp"
+         >
 
         <TextView
             android:id="@+id/tvTag1"
@@ -42,14 +42,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="三次计频"
+            android:text="@string/three_time"
             android:textColor="@drawable/pager_title_selector"
-            android:textSize="22sp" />
+            android:textSize="16sp" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:background="@color/light_gray" />
 
         <TextView
             android:id="@+id/tvTag2"
@@ -57,9 +57,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="冲刺计时"
+            android:text="@string/dash_timer"
             android:textColor="@drawable/pager_title_selector"
-            android:textSize="22sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
     <ImageView

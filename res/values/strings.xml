@@ -27,6 +27,11 @@
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     
     <!-- 运动员activity -->
+    <string name="manage_athlete">运动员管理</string>
+    <string name="athlete_id">编号</string>
+    <string name="name">姓名</string>
+    <string name="operation">操作</string>
+    
     <string name="male">男</string>
     <string name="female">女</string>
     <string name="unknow_error">未知错误</string>
@@ -35,6 +40,10 @@
     <string name="name_cannot_be_repete_string">存在运动员名字重复，请更改</string>
     
     <!--  登录activity -->
+    <string name="login_now">立即登录</string>
+    <string name="forget_pwd">忘记密码</string>
+    <string name="set_ip_and_port">设置服务器地址和端口</string>
+    
     <string name="input_user_name">请输入用户名</string>
     <string name="input_pwd">请输入密码</string>
     <string name="nameorpwd_cannot_be_empty">用户名或密码不能为空</string>
@@ -66,7 +75,7 @@
     <string name="score_num_not_match_athlete_num">成绩数与运动员人数不对应!</string>
     <string name="match_done">匹配完成!</string>
     
-    <!-- regist -->
+    <!-- registactivity -->
     <string name="quick_regist">快速注册</string>
     <string name="user_name">用户名</string>
     <string name="user_name_hint">请填写用户名</string>
@@ -104,6 +113,10 @@
     <string name="setting">设置</string>
     
     <!-- matchscoreactivity -->
+    <string name="match_score_athlete">运动员成绩匹配</string>
+    <string name="dash_length">冲刺距离</string>
+    <string name="finish_modify_and_count">调整完毕，进入统计</string>
+    
     <string name="leave_at_least_one_athlete">至少保留一个运动员</string>
     <string name="leave_at_least_one_score">至少保留一个成绩</string>
     <string name="adjust_finish_goto_statistics">调整完毕，进入统计页面</string>
@@ -129,9 +142,20 @@
     <string name="the_default_account_cannot_be_modified">当前为默认账户，不能够对密码进行修改</string>
     
     <!-- otherfunctionactivity -->
+    <string name="three_time">三次计频</string>
+    <string name="dash_timer">冲刺计时</string>
     
+    <string name="other_function">小功能</string>
     
     <!-- timersettingactivity -->
+    <string name="timer_setting">计时准备</string>
+    <string name="pool_length">泳池长度</string>
+    <string name="choose_stroke">泳姿选择</string>
+    <string name="time_interval">计时间隔</string>
+    <string name="swim_total_length">游泳总距离</string>
+    <string name="input_extra">请输入备注</string>
+    <string name="start_timer">开始计时</string>
+    
     <string name="set_total_length">请设置本轮计时的总距离</string>
     <string name="set_timer_interval_length">请设置本轮计时了时间间隔距离</string>
     <string name="interval_length_cannot_loger_than_total_length">计时间隔距离不能大于总距离</string>
@@ -139,8 +163,8 @@
     
     <!-- timeractivity -->
     <string name="No_timer">第 %s 几次计时</string>
-    <string name="No_1">第一名</string>
-    <string name="No_n">第 %d 名</string>
+    <string name="No_1">1</string>
+    <string name="No_n">%d</string>
     <string name="score_record_done">全部成绩记录完成</string>
     <string name="dont_save_more_score">不要保存太多不必要的成绩</string>
     <string name="time_reset">00:00:00</string>
@@ -153,6 +177,8 @@
     <string name="fragment_more">更多</string>
     
     <!-- settingactivity -->
+    <string name="system_settint">系统设置</string>
+    
     <string name="confirm_to_quit_app">确定退出程序？</string>
     
     <!-- modifypwdactivity -->
@@ -169,4 +195,21 @@
     <string name="reload_data">重新载入数据</string>
     <string name="save">保存</string>
     <string name="athlete_score_match">运动员成绩匹配</string>
+    
+    <!-- queryscoreactivity -->
+    <string name="first_round">第一趟</string>
+    
+    <!-- showscoreactivity -->
+    <string name="show_score">成绩展示</string>
+    
+    <!-- frequencefragment -->
+    <string name="three_time_result">三次计频结果</string>
+    <string name="reset">重置</string>
+    
+    <string name="click_clock_and_record_score">点击表盘开始计时，再次点击记录成绩</string>
+    <string name="default_time_per_min">0.00次/分钟</string>
+    
+    
+    <!-- springfragment -->
+    <string name="time">"%1$01d:%2$02d'%3$02d''%4$02d"</string>
 </resources>
