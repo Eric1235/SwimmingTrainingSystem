@@ -1,13 +1,4 @@
-﻿package com.scnu.swimmingtrainingsystem.activity;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.litepal.crud.DataSupport;
-
-import com.scnu.swimmingtrainingsystem.R;
+package com.scnu.swimmingtrainingsystem.activity;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -29,11 +20,20 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.scnu.swimmingtrainingsystem.R;
 import com.scnu.swimmingtrainingsystem.db.DBManager;
 import com.scnu.swimmingtrainingsystem.model.User;
-import com.scnu.swimmingtrainingsystem.util.Constants;
 import com.scnu.swimmingtrainingsystem.util.CommonUtils;
+import com.scnu.swimmingtrainingsystem.util.Constants;
+import com.scnu.swimmingtrainingsystem.util.SpUtil;
 import com.scnu.swimmingtrainingsystem.view.LoadingDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModifyPassActivity extends Activity {
 	private MyApplication app;
@@ -65,7 +65,9 @@ public class ModifyPassActivity extends Activity {
 
 	private void init() {
 		app = (MyApplication) getApplication();
-		userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
+		app.addActivity(this);
+//		userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
+		userId = SpUtil.getUID(ModifyPassActivity.this);
 		dbManager = DBManager.getInstance();
 		user = dbManager.getUserByUid(userId);
 		modify_oldpass = (EditText) findViewById(R.id.modify_oldpass);
@@ -152,7 +154,9 @@ public class ModifyPassActivity extends Activity {
 								DataSupport.updateAll(User.class, values, "password=?",oldPassword);
 								CommonUtils.showToast(ModifyPassActivity.this,
 										toast, getString(R.string.modify_succeed));
-								
+								Intent i = new Intent(ModifyPassActivity.this,LoginActivity.class);
+								startActivity(i);
+								finish();
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -174,7 +178,6 @@ public class ModifyPassActivity extends Activity {
 			protected Map<String, String> getParams() throws AuthFailureError {
 				// 设置请求参数
 				Map<String, String> map = new HashMap<String, String>();
-//				User user = dbManager.getUserByUid(userId);
 				map.put("uid", user.getUid() + "");
 				map.put("newPass", newPassword);
 				return map;

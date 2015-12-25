@@ -1,4 +1,4 @@
-﻿package com.scnu.swimmingtrainingsystem.model;
+package com.scnu.swimmingtrainingsystem.model;
 
 import org.litepal.crud.DataSupport;
 
@@ -118,6 +118,15 @@ public class Score extends DataSupport {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * 获取运动员的id
+	 * @return
+	 */
+	public int getAthleteId(){
+
+		return getAthlete().getAid();
 	}
 
 	@Override

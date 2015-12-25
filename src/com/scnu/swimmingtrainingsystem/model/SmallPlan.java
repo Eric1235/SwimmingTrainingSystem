@@ -1,10 +1,19 @@
-﻿package com.scnu.swimmingtrainingsystem.model;
+package com.scnu.swimmingtrainingsystem.model;
 
 public class SmallPlan {
 	private int distance;
 	private String pool;
 	private String extra;
 	private int strokeNumber;
+	private int time;//游泳圈数
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
 
 	public int getDistance() {
 		return distance;
@@ -42,10 +51,12 @@ public class SmallPlan {
 
 	@Override
 	public String toString() {
-		return "SmallPlan [distance=" + distance + ", pool=" + pool
-				+ ", extra=" + extra + ", stroke=" + strokeNumber + "]";
+		return "SmallPlan{" +
+				"distance=" + distance +
+				", pool='" + pool + '\'' +
+				", extra='" + extra + '\'' +
+				", strokeNumber=" + strokeNumber +
+				", time=" + time +
+				'}';
 	}
-
-
-
 }

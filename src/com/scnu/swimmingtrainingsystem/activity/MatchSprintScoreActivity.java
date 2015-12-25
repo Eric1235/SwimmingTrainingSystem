@@ -1,14 +1,4 @@
-﻿package com.scnu.swimmingtrainingsystem.activity;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+package com.scnu.swimmingtrainingsystem.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,16 +10,15 @@ import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
@@ -50,16 +39,24 @@ import com.scnu.swimmingtrainingsystem.R;
 import com.scnu.swimmingtrainingsystem.adapter.ChooseAthleteAdapter;
 import com.scnu.swimmingtrainingsystem.adapter.ScoreListAdapter;
 import com.scnu.swimmingtrainingsystem.db.DBManager;
-import com.scnu.swimmingtrainingsystem.effect.Effectstype;
-import com.scnu.swimmingtrainingsystem.effect.NiftyDialogBuilder;
 import com.scnu.swimmingtrainingsystem.http.JsonTools;
-import com.scnu.swimmingtrainingsystem.model.AdapterHolder;
 import com.scnu.swimmingtrainingsystem.model.Athlete;
 import com.scnu.swimmingtrainingsystem.model.Score;
 import com.scnu.swimmingtrainingsystem.model.User;
 import com.scnu.swimmingtrainingsystem.util.CommonUtils;
 import com.scnu.swimmingtrainingsystem.util.Constants;
+import com.scnu.swimmingtrainingsystem.util.SpUtil;
 import com.scnu.swimmingtrainingsystem.view.LoadingDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressLint("SimpleDateFormat")
 public class MatchSprintScoreActivity extends Activity {
@@ -154,6 +151,7 @@ public class MatchSprintScoreActivity extends Activity {
 	private void init() {
 		// TODO Auto-generated method stub
 		app = (MyApplication) getApplication();
+		app.addActivity(this);
 		mDbManager = DBManager.getInstance();
 		isConnected = (Boolean) app.getMap().get(Constants.IS_CONNECT_SERVER);
 		mQueue = Volley.newRequestQueue(this);
@@ -167,8 +165,9 @@ public class MatchSprintScoreActivity extends Activity {
 				android.R.layout.simple_spinner_dropdown_item, dashDistanceList);
 		distanceSpinner.setAdapter(spinerAdapter);
 		distanceSpinner.setSelection(2);
-		userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
+//		userId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
 		scores = getIntent().getStringArrayListExtra("SCORES");
+		userId = SpUtil.getUID(MatchSprintScoreActivity.this);
 		originScores.addAll(scores);
 		List<Athlete> athletes = mDbManager.getAthletes(userId);
 		for (int i = 0; i < athletes.size(); i++) {
@@ -209,67 +208,67 @@ public class MatchSprintScoreActivity extends Activity {
 			}
 		});
 
-		chooseAthlete(chooseButton);
+//		chooseAthlete(chooseButton);
 
 	}
 
-	public void chooseAthlete(View v) {
-		final NiftyDialogBuilder selectDialog = NiftyDialogBuilder
-				.getInstance(this);
-		Effectstype effect = Effectstype.Fall;
-		selectDialog.setCustomView(R.layout.dialog_choose_athlete, this);
-		Window window = selectDialog.getWindow();
-		athleteListView = (ListView) window.findViewById(R.id.choose_list);
-		allAthleteAdapter = new ChooseAthleteAdapter(this, athleteNames, map);
-		athleteListView.setAdapter(allAthleteAdapter);
-		athleteListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				AdapterHolder holder = (AdapterHolder) arg1.getTag();
-				// 改变CheckBox的状态
-				holder.cb.toggle();
-				if (holder.cb.isChecked()) {
-					if (!dragDatas.contains(allAthleteAdapter
-							.getChooseAthlete().get(arg2)))
-						// 如果checkbox已选并且chosenAthleteList中无该项
-						dragDatas.add(allAthleteAdapter.getChooseAthlete().get(
-								arg2));
-				} else {
-					// 如果checkbox不选择并且chosenAthleteList中有该项
-					if (dragDatas.contains(allAthleteAdapter.getChooseAthlete()
-							.get(arg2)))
-						dragDatas.remove(allAthleteAdapter.getChooseAthlete()
-								.get(arg2));
-				}
-				// 将CheckBox的选中状况记录下来
-				map.put(arg2, holder.cb.isChecked());
-			}
-		});
-		selectDialog.withTitle(getString(R.string.choose_athlete)).withMessage(null)
-				.withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-				.isCancelableOnTouchOutside(false).withDuration(500)
-				.withEffect(effect).withButton1Text(getString(R.string.back))
-				.withButton2Text(Constants.OK_STRING)
-				.setButton1Click(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						selectDialog.dismiss();
-					}
-				}).setButton2Click(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						dragAdapter.notifyDataSetChanged();
-						selectDialog.dismiss();
-					}
-
-				}).show();
-
-		allAthleteAdapter.notifyDataSetChanged();
-	}
+//	public void chooseAthlete(View v) {
+//		final NiftyDialogBuilder selectDialog = NiftyDialogBuilder
+//				.getInstance(this);
+//		Effectstype effect = Effectstype.Fall;
+//		selectDialog.setCustomView(R.layout.dialog_choose_athlete, this);
+//		Window window = selectDialog.getWindow();
+//		athleteListView = (ListView) window.findViewById(R.id.choose_list);
+//		allAthleteAdapter = new ChooseAthleteAdapter(this, athleteNames, map);
+//		athleteListView.setAdapter(allAthleteAdapter);
+//		athleteListView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//					long arg3) {
+//				AdapterHolder holder = (AdapterHolder) arg1.getTag();
+//				// 改变CheckBox的状态
+//				holder.cb.toggle();
+//				if (holder.cb.isChecked()) {
+//					if (!dragDatas.contains(allAthleteAdapter
+//							.getChooseAthlete().get(arg2)))
+//						// 如果checkbox已选并且chosenAthleteList中无该项
+//						dragDatas.add(allAthleteAdapter.getChooseAthlete().get(
+//								arg2));
+//				} else {
+//					// 如果checkbox不选择并且chosenAthleteList中有该项
+//					if (dragDatas.contains(allAthleteAdapter.getChooseAthlete()
+//							.get(arg2)))
+//						dragDatas.remove(allAthleteAdapter.getChooseAthlete()
+//								.get(arg2));
+//				}
+//				// 将CheckBox的选中状况记录下来
+//				map.put(arg2, holder.cb.isChecked());
+//			}
+//		});
+//		selectDialog.withTitle(getString(R.string.choose_athlete)).withMessage(null)
+//				.withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+//				.isCancelableOnTouchOutside(false).withDuration(500)
+//				.withEffect(effect).withButton1Text(getString(R.string.back))
+//				.withButton2Text(Constants.OK_STRING)
+//				.setButton1Click(new View.OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//						selectDialog.dismiss();
+//					}
+//				}).setButton2Click(new View.OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						// TODO Auto-generated method stub
+//						dragAdapter.notifyDataSetChanged();
+//						selectDialog.dismiss();
+//					}
+//
+//				}).show();
+//
+//		allAthleteAdapter.notifyDataSetChanged();
+//	}
 
 	public void saveScores(View v) {
 		if (!isSave) {
@@ -282,7 +281,7 @@ public class MatchSprintScoreActivity extends Activity {
 				String distance = distanceSpinner.getSelectedItem().toString()
 						.replace("米", "");
 				List<Integer> athIds = new ArrayList<Integer>();
-				User user = mDbManager.getUser(userId);
+				User user = mDbManager.getUserByUid(userId);
 				SimpleDateFormat sdf = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");
 				String date = sdf.format(new Date());

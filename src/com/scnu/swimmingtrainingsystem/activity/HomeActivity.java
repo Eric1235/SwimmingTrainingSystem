@@ -1,34 +1,29 @@
 package com.scnu.swimmingtrainingsystem.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-
-
-
-
-
-
-
-import com.scnu.swimmingtrainingsystem.R;
-import com.scnu.swimmingtrainingsystem.fragment.AthleteFragment;
-import com.scnu.swimmingtrainingsystem.fragment.MineFragment;
-import com.scnu.swimmingtrainingsystem.fragment.OtherFunctionFragment;
-import com.scnu.swimmingtrainingsystem.fragment.QueryScoreFragment;
-import com.scnu.swimmingtrainingsystem.fragment.TimerSettingFragment;
-import com.scnu.swimmingtrainingsystem.view.ChangeColorIconWithText;
-import com.scnu.swimmingtrainingsystem.view.NoScrollViewPager;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
+
+import com.scnu.swimmingtrainingsystem.R;
+import com.scnu.swimmingtrainingsystem.fragment.IndexFragment;
+import com.scnu.swimmingtrainingsystem.fragment.MineFragment;
+import com.scnu.swimmingtrainingsystem.fragment.TimerFragment;
+import com.scnu.swimmingtrainingsystem.util.CommonUtils;
+import com.scnu.swimmingtrainingsystem.util.Constants;
+import com.scnu.swimmingtrainingsystem.view.ChangeColorIconWithText;
+import com.scnu.swimmingtrainingsystem.view.NoScrollViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
 /**
  * 
  * @author lixinkun
@@ -36,6 +31,11 @@ import android.view.Window;
  * 2015年12月10日
  */
 public class HomeActivity extends FragmentActivity implements OnClickListener,OnPageChangeListener{
+
+	// 退出程序
+	private long mExitTime;
+	private MyApplication app;
+	private Toast toast;
 	
 	private NoScrollViewPager mViewPager;
 	private Fragment mFragment;
@@ -48,8 +48,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener,On
 		super.onCreate(arg0);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_home);
-		
-
+		app = (MyApplication)getApplication();
+		app.addActivity(this);
 		initViews();
 		
 		mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
@@ -64,19 +64,19 @@ public class HomeActivity extends FragmentActivity implements OnClickListener,On
 		mViewPager.setNoScroll(true);
 		ChangeColorIconWithText index = (ChangeColorIconWithText) findViewById(R.id.fragment_index);
 		mIndicators.add(index);
-		ChangeColorIconWithText consume = (ChangeColorIconWithText) findViewById(R.id.fragment_consume);
-		mIndicators.add(consume);
-		ChangeColorIconWithText chart = (ChangeColorIconWithText) findViewById(R.id.fragment_chart);
+//		ChangeColorIconWithText consume = (ChangeColorIconWithText) findViewById(R.id.fragment_consume);
+//		mIndicators.add(consume);
+		ChangeColorIconWithText chart = (ChangeColorIconWithText) findViewById(R.id.fragment_timer);
 		mIndicators.add(chart);
-		ChangeColorIconWithText all = (ChangeColorIconWithText) findViewById(R.id.fragment_all);
-		mIndicators.add(all);
+//		ChangeColorIconWithText all = (ChangeColorIconWithText) findViewById(R.id.fragment_all);
+//		mIndicators.add(all);
 		ChangeColorIconWithText more = (ChangeColorIconWithText) findViewById(R.id.fragment_more);
 		mIndicators.add(more);
 		
 		index.setOnClickListener(this);
-		consume.setOnClickListener(this);
+//		consume.setOnClickListener(this);
 		chart.setOnClickListener(this);
-		all.setOnClickListener(this);
+//		all.setOnClickListener(this);
 		more.setOnClickListener(this);
 		
 		index.setIconAlpha(1.0f);
@@ -85,7 +85,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener,On
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+		clickTab(v);
 	}
 
 
@@ -124,24 +124,18 @@ public class HomeActivity extends FragmentActivity implements OnClickListener,On
 			mIndicators.get(0).setIconAlpha(1.0f);
 			mViewPager.setCurrentItem(0,false);
 			break;
-		case R.id.fragment_consume:
+
+
+		case R.id.fragment_timer:
 			mIndicators.get(1).setIconAlpha(1.0f);
 			mViewPager.setCurrentItem(1,false);
 			break;
 
-		case R.id.fragment_chart:
-			mIndicators.get(2).setIconAlpha(1.0f);
-			mViewPager.setCurrentItem(2,false);
-			break;
 
-		case R.id.fragment_all:
-			mIndicators.get(3).setIconAlpha(1.0f);
-			mViewPager.setCurrentItem(3,false);
-			break;
 
 		case R.id.fragment_more:
-			mIndicators.get(4).setIconAlpha(1.0f);
-			mViewPager.setCurrentItem(4,false);
+			mIndicators.get(2).setIconAlpha(1.0f);
+			mViewPager.setCurrentItem(2,false);
 			break;
 
 
@@ -168,24 +162,28 @@ public class HomeActivity extends FragmentActivity implements OnClickListener,On
 			// TODO Auto-generated method stub
 			return mIndicators.size();
 		}
-		
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			return super.instantiateItem(container, position);
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			super.destroyItem(container, position, object);
+		}
+
 		@Override
 		public Fragment getItem(int position) {
 			// TODO Auto-generated method stub
 			switch(position){
 			case 0:
-				mFragment = new AthleteFragment();
+				mFragment = new IndexFragment();
 				break;
 			case 1:
-				mFragment = new TimerSettingFragment();
+				mFragment = new TimerFragment();
 				break;
 			case 2:
-				mFragment = new QueryScoreFragment();
-				break;
-			case 3:
-				mFragment = new OtherFunctionFragment();
-				break;
-			case 4:
 				mFragment = new MineFragment();
 				break;
 			default:
@@ -194,6 +192,40 @@ public class HomeActivity extends FragmentActivity implements OnClickListener,On
 			return mFragment;
 		}
 	}
-	
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {
+				CommonUtils.showToast(this,toast,getString(R.string.quit_app));
+				mExitTime = System.currentTimeMillis();
+			} else {
+				app.exit();
+			}
+
+			return true;
+		}
+		// 拦截MENU按钮点击事件，让他无任何操作
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		app.getMap().put(Constants.CURRENT_SWIM_TIME, 0);
+		app.getMap().put(Constants.PLAN_ID, 0);
+		app.getMap().put(Constants.TEST_DATE, "");
+		app.getMap().put(Constants.DRAG_NAME_LIST, null);
+		app.getMap().put(Constants.CURRENT_USER_ID, "");
+		app.getMap().put(Constants.IS_CONNECT_SERVER, true);
+		app.getMap().put(Constants.COMPLETE_NUMBER, 0);
+		app.getMap().put(Constants.INTERVAL, "");
+	}
 
 }

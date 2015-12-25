@@ -1,4 +1,4 @@
-﻿package com.scnu.swimmingtrainingsystem.util;
+package com.scnu.swimmingtrainingsystem.util;
 
 /**
  * 保存系统所需常量类
@@ -8,9 +8,17 @@
 public class Constants {
 
 	/**
+	 * 记录登录后的用户id
+	 */
+	public static final String USER_ID = "uid";
+
+
+	public static final String LOGIN_SUCCEED = "loginsucceed";
+
+	/**
 	 * 超时时间设置
 	 */
-	public static final int SOCKET_TIMEOUT = 10000;
+	public static final int SOCKET_TIMEOUT = 5000;
 
 	/**
 	 * 成绩类型 1:普通成绩
@@ -49,6 +57,11 @@ public class Constants {
 	 * 保存手动匹配计时按名次排行的运动员名字,方便除第一趟计时外不用再次拖动运动员进行排行
 	 */
 	public static final String DRAG_NAME_LIST = "dragList";
+
+	/**
+	 * 保存排行的运动员id
+	 */
+	public static final String DRAG_NAME_LIST_IDS = "DRAG_NAME_IDS";
 
 	/**
 	 * 保存当前登录的用户id
@@ -109,6 +122,9 @@ public class Constants {
 	public static final String SCORESJSON = "scoresJson";
 
 	public static final String ATHLETEJSON = "athleteJson";
+
+	public static final String ATHLETEIDJSON = "ATHLETEIDJSON";
+
 	/**
 	 * 使用说明标题
 	 */

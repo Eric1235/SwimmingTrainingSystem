@@ -1,13 +1,7 @@
-﻿package com.scnu.swimmingtrainingsystem.activity;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.litepal.crud.DataSupport;
+package com.scnu.swimmingtrainingsystem.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +19,11 @@ import com.scnu.swimmingtrainingsystem.model.ScoreSum;
 import com.scnu.swimmingtrainingsystem.util.CommonUtils;
 import com.scnu.swimmingtrainingsystem.util.Constants;
 import com.scnu.swimmingtrainingsystem.view.LoadingDialog;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 计时并且调整完毕后展示成绩的Activity
@@ -51,13 +50,14 @@ public class ShowScoreActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_showscore);
-		try {
-			init();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			startActivity(new Intent(this, LoginActivity.class));
-		}
+		init();
+//		try {
+//			init();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//			startActivity(new Intent(this, LoginActivity.class));
+//		}
 	}
 
 	/**
@@ -65,6 +65,7 @@ public class ShowScoreActivity extends Activity {
 	 */
 	private void init() {
 		mApplication = (MyApplication) getApplication();
+		mApplication.addActivity(this);
 		mDbManager = DBManager.getInstance();
 		mExpandableListView = (ExpandableListView) findViewById(R.id.show_list);
 		mPlanName = (TextView) findViewById(R.id.show_the_plan);
@@ -74,7 +75,7 @@ public class ShowScoreActivity extends Activity {
 		Long planid = (Long) mApplication.getMap().get(Constants.PLAN_ID);
 		Plan plan = DataSupport.find(Plan.class, planid);
 		mPlanName.setText(plan.getPool() + "  总距离：" + plan.getDistance()
-				+ "米    共" + (times - 1) + "趟");
+				+ "米    共" + (times - 2) + "趟");
 
 		adapter = new ShowScoreListAdapter(this, list, mScoreSum, 0);
 		mExpandableListView.setAdapter(adapter);

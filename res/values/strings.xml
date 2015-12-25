@@ -38,12 +38,16 @@
     <string name="add_athlete_title_string">添加运动员</string>
     <string name="name_cannot_be_empty_string">运动员名字不能为空</string>
     <string name="name_cannot_be_repete_string">存在运动员名字重复，请更改</string>
+
+    <!-- welcomeactivity -->
+    <string name="app_version">游泳系统 v2.0 \n By华南师范大学 2014-2015</string>
     
     <!--  登录activity -->
+    <string name="login_hint">用户登录</string>
     <string name="login_now">立即登录</string>
     <string name="forget_pwd">忘记密码</string>
     <string name="set_ip_and_port">设置服务器地址和端口</string>
-    
+    <string name="sending_request">正在发送请求…………</string>
     <string name="input_user_name">请输入用户名</string>
     <string name="input_pwd">请输入密码</string>
     <string name="nameorpwd_cannot_be_empty">用户名或密码不能为空</string>
@@ -108,6 +112,7 @@
     <!-- mainactivity -->
     <string name="athlete">运动员</string>
     <string name="timer">计时器</string>
+    <string name="choosed_athlete">已经选择的运动员</string>
     <string name="otherfunctions">小功能</string>
     <string name="queryscore">成绩查询</string>
     <string name="setting">设置</string>
@@ -121,7 +126,7 @@
     <string name="leave_at_least_one_score">至少保留一个成绩</string>
     <string name="adjust_finish_goto_statistics">调整完毕，进入统计页面</string>
     <string name="fill_in_scores_distance">请填写记录当前成绩的距离！</string>
-    <string name="score_num_not_equalwith_athlete_num">成绩数目与运动员数目不相等,请删除部分数据!</string>
+    <string name="score_num_not_equalwith_athlete_num">成绩数目与运动员数目不相等,请删除部分数据!若误删数据，可以按右上角按钮进行恢复</string>
     <string name="copy_add">复制添加该项</string>
     <string name="goto_next_timer_or_adjust_score">"是否开始下一趟计时？ \n选择【否】
         则返回调整成绩或者运动员数目,或者结束本轮计时\n选择【是】则直接开始下一趟计时</string>
@@ -162,7 +167,7 @@
     <string name="add_athlete_before_timer">请添加运动员后再开始计时</string>
     
     <!-- timeractivity -->
-    <string name="No_timer">第 %s 几次计时</string>
+    <string name="No_timer">第 %s 次计时</string>
     <string name="No_1">1</string>
     <string name="No_n">%d</string>
     <string name="score_record_done">全部成绩记录完成</string>
@@ -170,10 +175,8 @@
     <string name="time_reset">00:00:00</string>
     
     <!-- homeactivity -->
-    <string name="fragment_athlete">运动员</string>
-    <string name="fragment_consume">消费</string>
-    <string name="fragment_chart">图表</string>
-    <string name="fragment_all">记录</string>
+    <string name="fragment_index">首页</string>
+    <string name="fragment_timer">计时</string>
     <string name="fragment_more">更多</string>
     
     <!-- settingactivity -->
@@ -186,6 +189,8 @@
     <string name="old_pwd">原密码</string>
     <string name="new_pwd">新密码</string>
     <string name="modify">修改</string>
+    <string name="send_succ_check_email">发送成功，请查看邮箱</string>
+    <string name="user_not_exist">用户不存在</string>
     
     <!-- 找回密码 -->
     <string name="find_pwd">找回密码</string>
@@ -208,8 +213,20 @@
     
     <string name="click_clock_and_record_score">点击表盘开始计时，再次点击记录成绩</string>
     <string name="default_time_per_min">0.00次/分钟</string>
+
+    <!-- modifyEachTimeScoreActivityt -->
+    <string name="modify_score">调整多趟成绩</string>
     
     
     <!-- springfragment -->
     <string name="time">"%1$01d:%2$02d'%3$02d''%4$02d"</string>
+
+    <!-- minefragment -->
+    <string name="mine">我的</string>
+    <string name="question_help">问题帮助</string>
+    <string name="about_us">关于我们</string>
+    <string name="logout">退出登录</string>
+
+    <!-- indexfragment-->
+
 </resources>

@@ -1,6 +1,5 @@
-﻿package com.scnu.swimmingtrainingsystem.activity;
+package com.scnu.swimmingtrainingsystem.activity;
 
-import com.scnu.swimmingtrainingsystem.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,7 +9,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 
+import com.scnu.swimmingtrainingsystem.R;
 import com.scnu.swimmingtrainingsystem.util.Constants;
+import com.scnu.swimmingtrainingsystem.util.SpUtil;
 
 /**
  * 设置Activity
@@ -29,9 +30,10 @@ public class SettingActivity extends Activity {
 		setContentView(R.layout.activity_setting);
 		try {
 			app = (MyApplication) getApplication();
+			app.addActivity(this);
 			//这里是为了应对可能出现的application里面的全局变量被系统回收导致的错误
 			@SuppressWarnings("unused")
-			int mUserId = (Integer) app.getMap().get(Constants.CURRENT_USER_ID);
+			int mUserId = SpUtil.getUID(this);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -75,7 +77,7 @@ public class SettingActivity extends Activity {
 
 		switch (v.getId()) {
 		case R.id.setting_illustration:
-			Intent intent = new Intent(this, UseTipsActiviy.class);
+			Intent intent = new Intent(this, QuestionHelpActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.setting_change_password:

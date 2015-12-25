@@ -1,15 +1,7 @@
-﻿package com.scnu.swimmingtrainingsystem.db;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import org.litepal.crud.DataSupport;
+package com.scnu.swimmingtrainingsystem.db;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.scnu.swimmingtrainingsystem.model.Athlete;
 import com.scnu.swimmingtrainingsystem.model.Plan;
@@ -17,6 +9,13 @@ import com.scnu.swimmingtrainingsystem.model.Score;
 import com.scnu.swimmingtrainingsystem.model.ScoreSum;
 import com.scnu.swimmingtrainingsystem.model.User;
 import com.scnu.swimmingtrainingsystem.util.CommonUtils;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * 数据库操作类
@@ -40,23 +39,6 @@ public class DBManager {
 		return dbManager;
 	}
 
-	
-	/**
-	 * 根据id获取用户
-	 * 
-	 * @param id
-	 *            用户id
-	 * @return
-	 */
-	public User getUser(long id) {
-		
-		String userId = String.valueOf(id);
-		List<User> users = DataSupport.where("id=?",userId).find(User.class);
-		if(users.size()>0){
-			return users.get(0);
-		}
-		return null;
-	}
 	
 	public User getUserByUid(int uid){
 		String userId = String.valueOf(uid);
@@ -111,10 +93,6 @@ public class DBManager {
 		if(users.size()>0){
 			user = users.get(0);
 		}
-//		User user = DataSupport.find(User.class, userId);
-		Log.d("lixnkun", "query user=" + user.toString());
-//		List<Athlete> athletes = DataSupport.where("user_id=?", String.valueOf(user.getId())).find(
-//				Athlete.class, true);
 		List<Athlete> athletes = user.getAthletes();
 		return athletes;
 	}
@@ -166,18 +144,33 @@ public class DBManager {
 		return null;
 	}
 
+//	/**
+//	 * 根据名字数据获取对应的运动员对象
+//	 *
+//	 * @param names
+//	 *            运动员名字
+//	 * @return 运动员对象列表
+//	 */
+//	public List<Athlete> getAthleteByNames(List<String> names) {
+//		List<Athlete> lists = new ArrayList<Athlete>();
+//		for (String name : names) {
+//			Athlete athlete = DataSupport.where("name=?", name)
+//					.find(Athlete.class).get(0);
+//			lists.add(athlete);
+//		}
+//		return lists;
+//	}
+
 	/**
-	 * 根据名字数据获取对应的运动员对象
-	 * 
-	 * @param names
-	 *            运动员名字
-	 * @return 运动员对象列表
+	 * 通过运动员id来获取运动员列表
+	 * @param ids
+	 * @return
 	 */
-	public List<Athlete> getAthleteByNames(List<String> names) {
+	public List<Athlete> getAthleteByIDs(List<Integer> ids){
 		List<Athlete> lists = new ArrayList<Athlete>();
-		for (String name : names) {
-			Athlete athlete = DataSupport.where("name=?", name)
-					.find(Athlete.class).get(0);
+		for(int id:ids){
+			String idstr = String.valueOf(id);
+			Athlete athlete = DataSupport.where("aid=?",idstr).find(Athlete.class).get(0);
 			lists.add(athlete);
 		}
 		return lists;
